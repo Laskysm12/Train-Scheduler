@@ -6,9 +6,12 @@
     <title>Train Scheduler</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/styles.css" />
+    <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <!-- Bootstrap Reference -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Need moment.js ref --> 
 
 </head>
 
@@ -17,12 +20,15 @@
     <div class="container">
         <!-- Jumbotron -->
         <div class="jumbotron" style="background-color: #337ab7; color: white">
-          <h1 class="text-center">C'mon Ride a Train</h1>
-          <h3 class="text-center">Train Schedule</h3>
+          <h1 class="text-center">Train Scheduler</h1>
+          <h4 class="text-center">"The only way to be sure to catch a train is to miss the one before it."
+              - Gilbert K. Chesterton
+          </h4>
         </div>
         <div class="row">
           <div class="col-lg-12">
-          <!-- Current trloyees-->
+              
+          <!-- Current Train Schedule-->
             <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title"><strong>Current Train Schedule</strong></h3>
@@ -43,29 +49,33 @@
                 </table>
               </div>
             </div>
+
+            <!-- Add A Train -->
             <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title"><strong>Add Train</strong></h3>
               </div>
               <div class="panel-body">
+
+                <!-- Train Entry Form -->
                 <form>
                   <div class="form-group">
                     <label for="train-name-input">Train Name</label>
-                    <input class="form-control train-name-input" type="text">
+                    <input class="form-control" id="train-name-input" type="text" placeholder="Train Name">
                   </div>
                   <div class="form-group">
                     <label for="destination-input">Destination</label>
-                    <input class="form-control destination-input" type="text">
+                    <input class="form-control" id="destination-input" type="text" placeholder="Destination">
                   </div>
                   <div class="form-group">
                     <label for="start-input">First Train Time (HH:mm - Military Time)</label>
-                    <input class="form-control start-input" type="text">
+                    <input class="form-control" id="first-train-input" type="text" placeholder="First Train Time">
                   </div>
                   <div class="form-group">
                     <label for="freq-input">Frequency (min)</label>
-                    <input class="form-control freq-input" type="text">
+                    <input class="form-control" id="frequency-input" type="text" placeholder="Frequency">
                   </div>
-                  <button class="btn btn-primary add-train-btn" type="submit">Submit</button>
+                  <button class="btn btn-primary" id="add-train-btn" type="submit">Submit</button>
                 </form>
               </div>
             </div>
