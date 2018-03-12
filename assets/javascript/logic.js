@@ -2,18 +2,16 @@ var config = {
     apiKey: "AIzaSyCrWL1JaBSjbXPvyIUL_hmiriFyLhjYYs8",
     authDomain: "trainscheduler-a6988.firebaseapp.com",
     databaseURL: "https://trainscheduler-a6988.firebaseio.com",
-    projectId: "trainscheduler-a6988",
     storageBucket: "trainscheduler-a6988.appspot.com",
-    messagingSenderId: "261117632750"
-  };
-  firebase.initializeApp(config);
+};
+
+firebase.initializeApp(config);
 
 var database = firebase.database();
 
 // Button for adding Trains
 $("#add-train-btn").on("click", function(event) {
     event.preventDefault();
-})
 
 // Grabs user input
 var trainName = $("#train-name-input").val().trim();
@@ -46,3 +44,32 @@ $("#destination-input").val("");
 $("#first-train-input").val("");
 $("#frequency-input").val("");
 //Need to add one for minutes away!
+
+});
+
+// Firebase event for adding train data to the database and a row in the html when a user adds an entry
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+
+    console.log(childSnapshot.val());
+
+    // Store everything into a variable
+    var trainName = childSnapshot.val().name;
+    var trainDestination = childSnapshot.val().destination;
+    var trainFirst = childSnapshot.val().first;
+    var trainFrequency = childSnapshot.val().frequency;
+    // Need to add something for minutes left
+
+    // Console Log Train Info
+    console.log(trainName);
+    console.log(trainDestination);
+    console.log(trainFirst);
+    console.log(trainFrequency);
+    // Need to add something for minutes left
+
+
+// Add each train's data into the table
+$("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" +
+    trainDestination + "</td><td>" + trainFirst + "</td><td>" + trainFrequency
+    + "</td></tr>");
+
+});
