@@ -17,7 +17,7 @@ $("#add-train-btn").on("click", function(event) {
 var trainName = $("#train-name-input").val().trim();
 var trainDestination = $("#destination-input").val().trim();
 var trainFirst = $("#first-train-input").val().trim(); // NEED TO ADD moment info here
-var trainFrequency = $("#frequency-input").val().trim();
+var trainFrequency = $("#frequency-input").val();
 
 // Creates local "temporary" object for holding train data
 var trainData = {
@@ -59,17 +59,45 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     var trainFrequency = childSnapshot.val().frequency;
     // Need to add something for minutes left
 
-    // Console Log Train Info
-    console.log(trainName);
-    console.log(trainDestination);
-    console.log(trainFirst);
-    console.log(trainFrequency);
-    // Need to add something for minutes left
+    // // Console Log Train Info
+    // console.log(trainName);
+    // console.log(trainDestination);
+    // console.log(trainFirst);
+    // console.log(trainFrequency);
+    // // Need to add something for minutes left
+
+// ===========================MOMENT JS====================
+// Creating a variable for the train frequency input
+// $.isNumeric($("#frequency-input").val().trim());
+var tFrequency = $("#frequency-input").val();
+var parseFrequency = parseInt(tFrequency, 10);
+console.log(parseFrequency);
+
+//Form validation
+
+// Creating a variable for the first train time input
+var firstTime = $("#first-train-input").val().trim();
+
+var currentTime = moment();
+
+var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+// console.log(tFrequency);
+// console.log(firstTime);
+
+var diffTime = moment().diff(moment(firstTimeConverted), "minutes"); 
+console.log("DIFFERENCE IN TIME: " + diffTime);
+
+// =========================================================
+
+
+
 
 
 // Add each train's data into the table
+// *** Reason trainFirst appears under frequency is because it is listed third here and train frequency 4th 
 $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" +
-    trainDestination + "</td><td>" + trainFirst + "</td><td>" + trainFrequency
+    trainDestination + "</td><td>" + trainFrequency + "</td><td>" + trainFirst
     + "</td></tr>");
 
 });
