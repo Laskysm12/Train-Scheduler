@@ -75,8 +75,10 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
 //Form validation
 
+// Variable for Current Time 
 var currentTime = moment();
 
+// This protects against a negative number!
 var firstTimeConverted = moment(trainFirst, "HH:mm").subtract(1, "years");
 console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
@@ -105,7 +107,7 @@ console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 // Add each train's data into the table
 // *** Reason trainFirst appears under frequency is because it is listed third here and train frequency 4th 
 $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" +
-    trainDestination + "</td><td>" + trainFrequency + "</td><td>" + trainFirst
+    trainDestination + "</td><td>" + trainFrequency + "</td><td>" + moment(nextTrain).format("hh:mm") + "</td><td>" + tMinutesTillTrain
     + "</td></tr>");
 
 });
