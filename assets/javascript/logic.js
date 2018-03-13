@@ -17,7 +17,7 @@ $("#add-train-btn").on("click", function(event) {
 var trainName = $("#train-name-input").val().trim();
 var trainDestination = $("#destination-input").val().trim();
 var trainFirst = $("#first-train-input").val().trim(); // NEED TO ADD moment info here
-var trainFrequency = $("#frequency-input").val();
+var trainFrequency = parseInt($("#frequency-input").val());
 
 // Creates local "temporary" object for holding train data
 var trainData = {
@@ -69,23 +69,20 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 // ===========================MOMENT JS====================
 // Creating a variable for the train frequency input
 // $.isNumeric($("#frequency-input").val().trim());
-var tFrequency = $("#frequency-input").val();
-var parseFrequency = parseInt(tFrequency, 10);
-console.log(parseFrequency);
+// var tFrequency = $("#frequency-input").val();
+// var parseFrequency = parseInt(tFrequency, 10);
+// console.log(parseFrequency);
 
 //Form validation
 
-// Creating a variable for the first train time input
-var firstTime = $("#first-train-input").val().trim();
-
 var currentTime = moment();
 
-var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+var firstTimeConverted = moment(trainFirst, "HH:mm").subtract(1, "years");
 console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 // console.log(tFrequency);
 // console.log(firstTime);
 
-var diffTime = moment().diff(moment(firstTimeConverted), "minutes"); 
+var diffTime = moment().diff(firstTimeConverted, "minutes"); 
 console.log("DIFFERENCE IN TIME: " + diffTime);
 
 // =========================================================
