@@ -79,11 +79,22 @@ var currentTime = moment();
 
 var firstTimeConverted = moment(trainFirst, "HH:mm").subtract(1, "years");
 console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-// console.log(tFrequency);
-// console.log(firstTime);
 
+// Difference between the times
 var diffTime = moment().diff(firstTimeConverted, "minutes"); 
 console.log("DIFFERENCE IN TIME: " + diffTime);
+
+// Time apart (remainder)
+var tRemainder = diffTime % trainFrequency;
+console.log("REMAINING TIME: " + tRemainder);
+
+// Minutes Until The Next Train
+var tMinutesTillTrain = trainFrequency - tRemainder;
+console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+// Next Train
+var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
 // =========================================================
 
